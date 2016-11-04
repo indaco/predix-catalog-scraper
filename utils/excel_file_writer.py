@@ -16,7 +16,7 @@ class ExcelFileWriter(object):
         self.filename = filename
         if not os.path.exists(self.output_folder):
             os.makedirs(self.output_folder)
-        _result_file = os.path.join(self.output_folder,  self.filename)
+        _result_file = os.path.join(self.output_folder, self.filename)
         self.workbook = xlsxwriter.Workbook(_result_file)
         self._add_worksheets()
         self._set_general_options()
@@ -33,7 +33,7 @@ class ExcelFileWriter(object):
         elif category == "analytics":
             _ws = self.analytics_worksheet
         else:
-            print("=== ERROR: Category not recognized!")
+            print "=== ERROR: Category not recognized!"
             sys.exit()
 
         _ws.write('B1', self.num_of_categories, self.bold)

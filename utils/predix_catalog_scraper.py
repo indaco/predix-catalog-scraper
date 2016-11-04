@@ -29,12 +29,11 @@ class PredixCatalogScraper(object):
             _html_tree, self.CATALOG_CATEGORY_CSS_CLASS)
         self.num_of_categories = self.spider.count(_categories)
 
-        print("\n## Collecting info for the following",
-              self.num_of_categories, "categories:")
+        print "\n## Collecting info for the following " + str(self.num_of_categories) +  " categories:"
         for c in _categories:
             _section_title = self.spider.get_category_title(
                 c, self.CATEGORY_TITLE_CSS_CLASS)
-            print(' - ', _section_title)
+            print ' - ' + _section_title
             _tiles_list = self.spider.get_tiles(c, self.TILE_CSS_CLASS)
             self.num_of_tiles += self.spider.count(_tiles_list)
             self.spider.build_dataset(_section_title,
@@ -54,7 +53,7 @@ class PredixCatalogScraper(object):
         elif self.catalog_name == self.configs.px_analytics:
             return self.configs.px_analytics_catalog_url
         else:
-            print("\n=== ERROR: Catalog name not recognized!\n")
+            print "\n=== ERROR: Catalog name not recognized!\n"
             sys.exit(0)
 
     def write_to_file(self, file_writer):

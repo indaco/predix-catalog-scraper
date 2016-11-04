@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 from lxml import html
 import re
+import selenium
+selenium.__file__
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
@@ -27,7 +29,7 @@ class WebPageSpider(object):
                 (By.CLASS_NAME, css_class_name)))
             return self.driver.page_source
         except selenium.common.exceptions.TimeoutException as e:
-            print("\n ==== EXCEPTION: TimeoutException \n")
+            print "\n ==== EXCEPTION: TimeoutException \n"
 
     def get_html_tree(self, page_source):
         """ Return the HTML tree for the page. """
@@ -71,7 +73,7 @@ class WebPageSpider(object):
         """ Generate the dataset """
         for tile in data:
             _tile_title = tile.find('h3').text
-            print("\t-- Reading: '", _tile_title, "'")
+            print "    -- Reading: '", _tile_title, "'"
             _tile_status = self._getServiceStatus(
                 tile, css_class_name_3, css_class_name_4)
             _tile_short_text = tile.find(
