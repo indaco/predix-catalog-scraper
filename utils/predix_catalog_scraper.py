@@ -13,10 +13,12 @@ class PredixCatalogScraper(object):
     num_of_categories = 0
     num_of_tiles = 0
 
-    def __init__(self, web_spider, catalog_name, configs):
+    def __init__(self, web_spider, configs):
         super(PredixCatalogScraper, self).__init__()
         self.configs = configs
         self.spider = web_spider
+
+    def set_catalog_name(self, catalog_name):
         self.catalog_name = catalog_name
 
     def parse(self):
@@ -44,22 +46,27 @@ class PredixCatalogScraper(object):
                                       self.TILE_BETA_CSS_CLASS,
                                       self.TILE_COMING_SOON_CSS_CLASS,
                                       self.TILE_VENDOR_PUBLISHED_INFO)
-        self.category_tiles = self.spider.get_dataset()
+        self.catalog_tiles = self.spider.get_dataset()
         self.spider.close()
 
-    def getCatalogName(self):
+    def get_catalog_name(self):
         return self.catalog_name
 
-    def getContent(self):
-        return self.category_tiles
+    def get_tiles(self):
+        return self.catalog_tiles
 
-    def categoriesCounter(self):
+    def categories_counter(self):
         """ Count the number of service categories. """
         return self.num_of_categories
 
-    def tilesCounter(self):
+    def tiles_counter(self):
         """ Count the number of services. """
         return self.num_of_tiles
+
+    def reset(self):
+        self.catalog_tiles = None
+        self.num_of_categories = 0
+        self.num_of_tiles = 0
 
     def _get_catalog_name_url(self):
         """ get the right url for the catalog item. """
