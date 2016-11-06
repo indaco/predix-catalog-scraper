@@ -13,10 +13,13 @@ class PredixCatalogScraper(object):
     num_of_categories = 0
     num_of_tiles = 0
 
-    def __init__(self, web_spider, catalog_name, configs):
+    def __init__(self, web_spider, configs):
         super(PredixCatalogScraper, self).__init__()
         self.configs = configs
         self.spider = web_spider
+
+    def set_catalog_name(self, catalog_name):
+        """ Set the catalog name. """
         self.catalog_name = catalog_name
 
     def parse(self):
@@ -29,11 +32,11 @@ class PredixCatalogScraper(object):
             _html_tree, self.CATALOG_CATEGORY_CSS_CLASS)
         self.num_of_categories = self.spider.count(_categories)
 
-        print "\n## Collecting info for the following " + str(self.num_of_categories) +  " categories:"
+        print "\n## Collecting info for the following", self.num_of_categories, "categories:"
         for c in _categories:
             _section_title = self.spider.get_category_title(
                 c, self.CATEGORY_TITLE_CSS_CLASS)
-            print ' - ' + _section_title
+            print ' - ', _section_title
             _tiles_list = self.spider.get_tiles(c, self.TILE_CSS_CLASS)
             self.num_of_tiles += self.spider.count(_tiles_list)
             self.spider.build_dataset(_section_title,
@@ -43,22 +46,30 @@ class PredixCatalogScraper(object):
                                       self.TILE_BETA_CSS_CLASS,
                                       self.TILE_COMING_SOON_CSS_CLASS,
                                       self.TILE_VENDOR_PUBLISHED_INFO)
-        self.category_tiles = self.spider.get_dataset()
+        self.catalog_tiles = self.spider.get_dataset()
         self.spider.close()
 
-    def getCatalogName(self):
+    def get_catalog_name(self):
+        """ Return the catalog name. """
         return self.catalog_name
 
-    def getContent(self):
-        return self.category_tiles
+    def get_tiles(self):
+        """ Return the array of tiles with their info. """
+        return self.catalog_tiles
 
-    def categoriesCounter(self):
+    def categories_counter(self):
         """ Count the number of service categories. """
         return self.num_of_categories
 
-    def tilesCounter(self):
+    def tiles_counter(self):
         """ Count the number of services. """
         return self.num_of_tiles
+
+    def reset(self):
+        """ reset variables. """
+        self.catalog_tiles = None
+        self.num_of_categories = 0
+        self.num_of_tiles = 0
 
     def _get_catalog_name_url(self):
         """ get the right url for the catalog item. """
