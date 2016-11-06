@@ -50,9 +50,11 @@ class PredixCatalogScraper(object):
         self.spider.close()
 
     def get_catalog_name(self):
+        """ Return the catalog name. """
         return self.catalog_name
 
     def get_tiles(self):
+        """ Return the array of tiles with their info. """
         return self.catalog_tiles
 
     def categories_counter(self):
@@ -64,6 +66,7 @@ class PredixCatalogScraper(object):
         return self.num_of_tiles
 
     def reset(self):
+        """ reset variables. """
         self.catalog_tiles = None
         self.num_of_categories = 0
         self.num_of_tiles = 0

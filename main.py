@@ -39,7 +39,7 @@ catalogs = {
 }
 
 def cleanup():
-    """ Removing __pycache_folders and clean """
+    """ Removing __pycache_folders and clean. """
     ghostdriver_log_file = "ghostdriver.log"
     if os.path.exists(ghostdriver_log_file):
         os.remove(ghostdriver_log_file)
@@ -53,10 +53,11 @@ def cleanup():
     file_writer.close()
 
 def sigint_handler(signum, frame):
-    """ Handle CTRL+C in the script """
+    """ Handle CTRL+C in the script. """
     cleanup()
 
 def main():
+    """ Main code. """
     # Create an excel workbook
     file_writer.create_file(OUTPUT_FOLDER, OUTPUT_FILENAME)
     # Create a webpage spider instance
@@ -71,6 +72,7 @@ def main():
     services_catalog_categories_counter = scraper.categories_counter()
     services_catalog_tiles_counter = scraper.tiles_counter()
 
+    # Add a worksheet to the Excel file and the content belong it
     file_writer.add_worksheet(catalogs[0]())
     file_writer.set_summary_vars(services_catalog_categories_counter, services_catalog_tiles_counter)
     file_writer.write_content(scraper.get_tiles())
@@ -85,6 +87,7 @@ def main():
     analytics_catalog_categories_counter = scraper.categories_counter()
     analytics_catalog_tiles_counter = scraper.tiles_counter()
 
+    # Add a worksheet to the Excel file and the content belong it
     file_writer.add_worksheet(catalogs[1]())
     file_writer.set_summary_vars(analytics_catalog_categories_counter, analytics_catalog_tiles_counter)
     file_writer.write_content(scraper.get_tiles())
