@@ -46,6 +46,20 @@ class PredixCatalogScraper(object):
         self.category_tiles = self.spider.get_dataset()
         self.spider.close()
 
+    def getCatalogName(self):
+        return self.catalog_name
+
+    def getContent(self):
+        return self.category_tiles
+
+    def categoriesCounter(self):
+        """ Count the number of service categories. """
+        return self.num_of_categories
+
+    def tilesCounter(self):
+        """ Count the number of services. """
+        return self.num_of_tiles
+
     def _get_catalog_name_url(self):
         """ get the right url for the catalog item. """
         if self.catalog_name == self.configs.px_services:
@@ -55,17 +69,3 @@ class PredixCatalogScraper(object):
         else:
             print "\n=== ERROR: Catalog name not recognized!\n"
             sys.exit(0)
-
-    def write_to_file(self, file_writer):
-        """ Write the content to the excel file. """
-        file_writer.set_summary_vars(self.num_of_categories, self.num_of_tiles)
-        file_writer.write_content(self.catalog_name, self.category_tiles)
-        self.category_tiles = None
-
-    def categoriesCounter(self):
-        """ Count the number of service categories. """
-        return self.num_of_categories
-
-    def tilesCounter(self):
-        """ Count the number of services. """
-        return self.num_of_tiles
