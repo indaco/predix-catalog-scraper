@@ -2,7 +2,7 @@
 
 The GE Digital's Predix Catalog it's a really fast growing list of micro services delivered on top of the Predix Operating System for IIoT.
 
-This script is something like an **Export to Excel** for the Predix Catalog. It scrapes the Predix.io Catalog and generate an excel file listing all the services available on it.
+This script is something like an **Export to Excel** for the Predix Catalog. It scrapes the Predix.io Catalog and generates an excel file listing all the services available on it.
 
 For each tile on the Predix.io Catalog it collects the following information:
 
@@ -34,14 +34,14 @@ Make sure to install the required dependencies both at OS and Python level.
 
 #### OS
 
-- libxml2 (Visit the [official web site](http://www.xmlsoft.org/downloads.html) to download the latest version compatible with your OS)
+- libxml2 (Visit the [official web site](http://www.xmlsoft.org/downloads.html) to download the latest compatible version for your OS)
 - PhantomJS (Visit the [official web site](http://phantomjs.org/) for the installation guide)
 
 #### Python
 
 - BeautifulSoup
 - LXML
-   - Windows users can download the binary for your installed python version directly from [here](https://pypi.python.org/pypi/lxml/3.6.4)
+   - Windows users can download the binary for the installed python version directly from [here](https://pypi.python.org/pypi/lxml/3.6.4)
 - Selenium
 - XlsxWriter
 
