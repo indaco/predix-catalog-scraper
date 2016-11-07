@@ -50,7 +50,7 @@ def cleanup():
         subprocess.check_output(
             ['find', '.', '-name', '*.pyc', '-exec', 'rm', '-rf', '{}', ';'])
     elif sys.platform == "win32":
-        subprocess.check_output(['del', '/s', '/q', '*.pyc'])
+        subprocess.check_output(['del', '/S', '/Q', '*.pyc'])
     else:
         exit(0)
 
