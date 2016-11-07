@@ -41,6 +41,7 @@ Make sure to install the required dependencies both at OS and Python level.
 
 - BeautifulSoup
 - LXML
+   - Windows users can download the binary for your installed python version directly from [here](https://pypi.python.org/pypi/lxml/3.6.4)
 - Selenium
 - XlsxWriter
 
