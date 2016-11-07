@@ -28,6 +28,26 @@ Below a couple of screenshots from the generated excel file showing part of the 
 ![Services Screenshot](/pictures/2_analytics.png)
 
 
+## Dependencies
+
+Make sure to install the required dependencies both at OS and Python level.
+
+#### OS
+
+- libxml2 (Visit the [official web site](http://www.xmlsoft.org/downloads.html) to download the latest version compatible with your OS)
+- PhantomJS (Visit the [official web site](http://phantomjs.org/) for the installation guide)
+
+#### Python
+
+- BeautifulSoup
+- LXML
+- Selenium
+- XlsxWriter
+
+Install the python libs using _pip_ (_usage of `sudo` can be required based on your OS_):
+
+`$ pip install lxml beautifulsoup4 selenium XlsxWriter`
+
 ## How to use it?
 
 This script has been developed and tested against Python v.2.7.11 and v.3.5.2 on Linux (Ubuntu) and Mac OSX 10.x. Windows users should be able to use it once all the dependencies are installed on their local machine.
@@ -52,23 +72,6 @@ $ python main.py
 ```
 
 See the generated file: `output/predix-catalog.xlsx`
-
-### Dependencies
-
-#### OS
-
-- libxml2 (Visit the [official web site](http://www.xmlsoft.org/downloads.html) to download the latest version compatible with your OS)
-- PhantomJS (Visit the [official web site](http://phantomjs.org/) for the installation guide)
-
-#### Python
-
-- BeautifulSoup
-- LXML
-- Selenium
-- XlsxWriter
-
-Install the python libs using _pip_:
-`$ pip install lxml beautifulsoup4 selenium XlsxWriter`
 
 - - -
 
