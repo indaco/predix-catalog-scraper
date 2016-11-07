@@ -17,13 +17,14 @@ import os
 import sys
 import shutil
 import signal
+from datetime import datetime
 import configs  # configuration settings come from configs.py
 from utils.webpage_spider import WebPageSpider
 from utils.predix_catalog_scraper import PredixCatalogScraper
 from utils.excel_file_writer import ExcelFileWriter
 
 OUTPUT_FOLDER = "output"
-OUTPUT_FILENAME = "predix-catalog.xlsx"
+OUTPUT_FILENAME = "predix-catalog_" + datetime.now().strftime('%Y%m%d') + ".xlsx"
 
 file_writer = ExcelFileWriter()
 
