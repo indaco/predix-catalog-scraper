@@ -34,7 +34,7 @@ Make sure to install the required dependencies both at OS and Python level.
 
 #### OS
 
-- libxml2 (Visit the [official web site](http://www.xmlsoft.org/downloads.html) to download the latest version compatible with your OS)
+- libxml2 (Visit the [official web site](http://www.xmlsoft.org/downloads.html) to download the latest compatible version for your OS)
 - PhantomJS (Visit the [official web site](http://phantomjs.org/) for the installation guide)
 
 #### Python
