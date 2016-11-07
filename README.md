@@ -2,7 +2,7 @@
 
 The GE Digital's Predix Catalog it's a really fast growing list of micro services delivered on top of the Predix Operating System for IIoT.
 
-This script is a something like an **Export to Excel** for the Predix Catalog. It scrapes the Predix.io Catalog and generate an excel file listing all the services available on it.
+This script is something like an **Export to Excel** for the Predix Catalog. It scrapes the Predix.io Catalog and generate an excel file listing all the services available on it.
 
 For each tile on the Predix.io Catalog it collects the following information:
 
@@ -30,7 +30,9 @@ Below a couple of screenshots from the generated excel file showing part of the 
 
 ## How to use it?
 
-**Note**:This script has been developed and tested against Python v.2.7 and v.3.5 on Linux (Ubuntu) and Mac OSX 10.x. Windows users should be able to use it once all the dependencies are installed on their local machine.
+This script has been developed and tested against Python v.2.7.11 and v.3.5.2 on Linux (Ubuntu) and Mac OSX 10.x. Windows users should be able to use it once all the dependencies are installed on their local machine.
+
+> **Note for GE Internals:** MyApps Anywhere blocks the http traffic via an unknown browser like PhantomJS. In order to use this script, temporarily disable it, execute the script and then re-enable MyApps Anywhere. I'll try to fix it asap.
 
 ##### Python 3.5
 
