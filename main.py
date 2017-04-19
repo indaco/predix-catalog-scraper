@@ -8,8 +8,8 @@
     Scrape the Predix.io Catalog and generate an excel file listing
     all the services with detailed information available on it.
 
-    :version: 0.1
-    :copyright: 2016 by Mirco Veltri
+    :version: 0.2
+    :copyright: 2016-2017 by Mirco Veltri
     :license: GPL, see LICENSE for more details
 """
 
@@ -28,16 +28,24 @@ OUTPUT_FILENAME = "predix-catalog_" + datetime.now().strftime('%Y%m%d') + ".xlsx
 
 file_writer = ExcelFileWriter()
 
+
 def services():
     return "services"
+
 
 def analytics():
     return "analytics"
 
+
+def apps():
+    return "apps"
+
 catalogs = {
     0: services,
-    1: analytics
+    1: analytics,
+    2: apps
 }
+
 
 def cleanup():
     """ Removing __pycache_folders and clean. """
@@ -53,9 +61,11 @@ def cleanup():
 
     file_writer.close()
 
+
 def sigint_handler(signum, frame):
     """ Handle CTRL+C in the script. """
     cleanup()
+
 
 def main():
     """ Main code. """
@@ -67,7 +77,8 @@ def main():
     scraper = PredixCatalogScraper(web_spider, configs)
 
     # Scraping the Services Catalog
-    print("\n# Scraping Predix Catalog for 'Services':", configs.px_services_catalog_url)
+    print("\n# Scraping Predix Catalog for 'Services':",
+          configs.px_services_catalog_url)
     scraper.set_catalog_name(catalogs[0]())
     scraper.parse()
     services_catalog_categories_counter = scraper.categories_counter()
@@ -75,14 +86,16 @@ def main():
 
     # Add a worksheet to the Excel file and the content belong it
     file_writer.add_worksheet(catalogs[0]())
-    file_writer.set_summary_vars(services_catalog_categories_counter, services_catalog_tiles_counter)
+    file_writer.set_summary_vars(
+        services_catalog_categories_counter, services_catalog_tiles_counter)
     file_writer.write_content(scraper.get_tiles())
 
     # reset the tiles array
     scraper.reset()
 
     # Scraping the Analytics Catalog
-    print("\n# Scraping Predix Catalog for 'Analytics':", configs.px_analytics_catalog_url)
+    print("\n# Scraping Predix Catalog for 'Analytics':",
+          configs.px_analytics_catalog_url)
     scraper.set_catalog_name(catalogs[1]())
     scraper.parse()
     analytics_catalog_categories_counter = scraper.categories_counter()
@@ -90,7 +103,24 @@ def main():
 
     # Add a worksheet to the Excel file and the content belong it
     file_writer.add_worksheet(catalogs[1]())
-    file_writer.set_summary_vars(analytics_catalog_categories_counter, analytics_catalog_tiles_counter)
+    file_writer.set_summary_vars(
+        analytics_catalog_categories_counter, analytics_catalog_tiles_counter)
+    file_writer.write_content(scraper.get_tiles())
+
+    # reset the tiles array
+    scraper.reset()
+
+    # Scraping the Applications Catalog
+    print("\n# Scraping Predix Catalog for 'Applications':", configs.px_applications_catalog_url)
+    scraper.set_catalog_name(catalogs[2]())
+    scraper.parse()
+    applications_catalog_categories_counter = scraper.categories_counter()
+    applications_catalog_tiles_counter = scraper.tiles_counter()
+
+    # Add a worksheet to the Excel file and the content belong it
+    file_writer.add_worksheet(catalogs[2]())
+    file_writer.set_summary_vars(
+        applications_catalog_categories_counter, applications_catalog_tiles_counter)
     file_writer.write_content(scraper.get_tiles())
 
     # Save and close the Excel file
@@ -106,6 +136,10 @@ def main():
     print("\n## Summary for 'Analytics':")
     print("\t* number of available categories:", analytics_catalog_categories_counter)
     print("\t* number of available services:", analytics_catalog_tiles_counter)
+
+    print("\n## Summary for 'Applications':")
+    print("\t* number of available categories:", applications_catalog_categories_counter)
+    print("\t* number of available services:", applications_catalog_tiles_counter)
 
 
 if __name__ == "__main__":
