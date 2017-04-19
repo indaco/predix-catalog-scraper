@@ -65,9 +65,10 @@ class WebPageSpider(object):
         tile_info = text.split(self.EXTRACT_VENDOR_AND_PUBLISHING_DATE_REGEX)
         tile_info[0] = re.sub('Service published by', '', tile_info[0].strip())
         tile_info[0] = re.sub('Analytic published by', '', tile_info[0].strip())
+        tile_info[0] = re.sub('Application published by', '', tile_info[0].strip())
         return tile_info
 
-    def build_dataset(self, section_title, data, css_class_name_1, css_class_name_2, css_class_name_3, css_class_name_4, css_class_name_5):
+    def build_dataset(self, section_title, data, css_class_name_1, css_class_name_2, css_class_name_3, css_class_name_4, css_class_name_5, css_class_name_6):
         """ Generate the dataset """
         for tile in data:
             _tile_title = tile.find('h3').text
@@ -81,12 +82,24 @@ class WebPageSpider(object):
             # Visiting service web page and get info around it
             _tile_page = self.read(_tile_link, css_class_name_2)
             _tile_tree = self.get_html_tree(_tile_page)
-            __tile_info = self._extract_vendor_and_publishing_date(
-                _tile_tree.find('h3', {'class': css_class_name_5}).text)
-            _vendor_name = __tile_info[0]
-            _publishing_date = __tile_info[1]
-            _tile_long_text = _tile_tree.find(
-                'div', {'class': css_class_name_2}).text
+            if _tile_tree.find('h3', {'class': css_class_name_5}) != None:
+                __tile_info = self._extract_vendor_and_publishing_date(
+                    _tile_tree.find('h3', {'class': css_class_name_5}).text)
+            elif _tile_tree.find('div', {'class': css_class_name_5}) != None:
+                __tile_info = self._extract_vendor_and_publishing_date(
+                    _tile_tree.find('div', {'class': css_class_name_5}).text)
+
+            _tile_long_text = ""
+            if len(__tile_info) == 2:
+                _vendor_name = __tile_info[0]
+                _publishing_date = __tile_info[1]
+                _tile_long_text = _tile_tree.find(
+                    'div', {'class': css_class_name_2}).text
+            else:
+                _vendor_name = ""
+                _publishing_date = __tile_info[0]
+                _tile_long_text = _tile_tree.find(
+                    'div', {'class': css_class_name_6}).text
             # add to the dataset
             self._tiles_info.append([_tile_title, section_title, _tile_status, _vendor_name,
                                      _tile_short_text, _tile_long_text, _tile_link, _publishing_date])

@@ -6,6 +6,7 @@ class PredixCatalogScraper(object):
     TILE_CSS_CLASS = "catalog-tile ng-scope"
     TILE_SHORT_TEXT_CSS_CLASS = "catalog-tile__shortdescription ng-binding"
     TILE_LONG_TEXT_CSS_CLASS = "text--small"
+    TILE_LONG_TEXT_CSS_CLASS_ANALYTICS = "text--small mb++"
     TILE_BETA_CSS_CLASS = "catalog-tile--beta"
     TILE_COMING_SOON_CSS_CLASS = "catalog-tile--coming-soon"
     TILE_VENDOR_PUBLISHED_INFO = "text--small text--gray"
@@ -45,7 +46,8 @@ class PredixCatalogScraper(object):
                                       self.TILE_LONG_TEXT_CSS_CLASS,
                                       self.TILE_BETA_CSS_CLASS,
                                       self.TILE_COMING_SOON_CSS_CLASS,
-                                      self.TILE_VENDOR_PUBLISHED_INFO)
+                                      self.TILE_VENDOR_PUBLISHED_INFO,
+                                      self.TILE_LONG_TEXT_CSS_CLASS_ANALYTICS)
         self.catalog_tiles = self.spider.get_dataset()
         self.spider.close()
 
@@ -77,6 +79,8 @@ class PredixCatalogScraper(object):
             return self.configs.px_services_catalog_url
         elif self.catalog_name == self.configs.px_analytics:
             return self.configs.px_analytics_catalog_url
+        elif self.catalog_name == self.configs.px_applications:
+            return self.configs.px_applications_catalog_url
         else:
             print("\n=== ERROR: Catalog name not recognized!\n")
             sys.exit(0)
