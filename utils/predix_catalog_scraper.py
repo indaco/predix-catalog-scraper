@@ -6,7 +6,7 @@ class PredixCatalogScraper(object):
     TILE_CSS_CLASS = "catalog-tile ng-scope"
     TILE_SHORT_TEXT_CSS_CLASS = "catalog-tile__shortdescription ng-binding"
     TILE_LONG_TEXT_CSS_CLASS = "text--small"
-    TILE_LONG_TEXT_CSS_CLASS_ANALYTICS = "text--small mb++"
+    TILE_LONG_TEXT_CSS_CLASS_ANALYTICS = "text--small u-pb++"
     TILE_BETA_CSS_CLASS = "catalog-tile--beta"
     TILE_COMING_SOON_CSS_CLASS = "catalog-tile--coming-soon"
     TILE_VENDOR_PUBLISHED_INFO = "text--small text--gray"
